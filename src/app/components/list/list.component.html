@@ -1,0 +1,10 @@
+<div>
+	<cdk-virtual-scroll-viewport class="dropdown-container" itemSize="{{data?.length}}">
+		<ng-container *cdkVirtualFor="let item of data">
+			<div class="select-row d-flex">
+				<img src="{{item.image}}">
+				<p>{{item.title}}</p>
+			</div>
+		</ng-container>
+	</cdk-virtual-scroll-viewport>
+</div>
