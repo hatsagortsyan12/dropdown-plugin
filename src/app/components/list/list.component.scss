@@ -1,19 +1,33 @@
 .dropdown-container {
 	height: 300px;
 	overflow-y: scroll;
+}
 
-	.select-row {
-		line-height: 1;
-		padding: 10px;
-		margin: 10px 0;
-	
-		img {
-			width: 100px;
-			height: 14px;
-		}
-		
-		p {
-			margin: 0 20px;
-		}
+.select-row {
+	line-height: 1;
+	padding: 10px;
+	cursor: pointer;
+	width: auto;
+	height: 50px;
+
+	img {
+		width: 100px;
+		height: 14px;
 	}
+	
+	p {
+		margin: 0 20px;
+	}
+}
+
+.selected {
+	background-color: #ddd;
+}
+
+.select-row:hover {
+	background-color: #eee;
+}
+
+.select-box {
+	margin-bottom: 25px;
 }

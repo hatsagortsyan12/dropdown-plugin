@@ -1,10 +1,19 @@
 <div>
-	<cdk-virtual-scroll-viewport class="dropdown-container" itemSize="{{data?.length}}">
-		<ng-container *cdkVirtualFor="let item of data">
-			<div class="select-row d-flex">
+	<div class="select-box">
+		<div *ngFor="let item of data; let i = index;">
+			<div *ngIf="item.select" class="select-row d-flex" (click)="update(i, false)">
+				<img src="{{item.image}}">
+				<p>{{item.title}}</p>
+			</div>
+		</div>
+	</div>
+	<cdk-virtual-scroll-viewport class="dropdown-container" itemSize="5">
+		<ng-container *cdkVirtualFor="let item of data; let i = index;">
+			<div [ngClass]="{'selected': item.select}" class="select-row d-flex" (click)="update(i, true)">
 				<img src="{{item.image}}">
 				<p>{{item.title}}</p>
 			</div>
 		</ng-container>
 	</cdk-virtual-scroll-viewport>
+	<button>Save</button>
 </div>
