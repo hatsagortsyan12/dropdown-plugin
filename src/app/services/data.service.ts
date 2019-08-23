@@ -12,7 +12,7 @@ export class DataService {
 		return this.http.get<ILicense[]>(`${environment.baseURL}/${environment.api.licenses}`);
 	}
 
-	update(license: ILicense) {
+	update(license: ILicense[]) {
 		return this.http.put<ILicense[]>(`${environment.baseURL}/${environment.api.licenses}`, license);
 	}
 }

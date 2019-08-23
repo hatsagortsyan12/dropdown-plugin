@@ -17,14 +17,17 @@ export class ListComponent implements OnInit {
 		this.data = licenses || [];
 	}
 
-	@Output() licenseUpdate: EventEmitter<ILicense> = new EventEmitter<ILicense>();
+	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
 
 	ngOnInit() {
 	}
 
-	update(index: number, status: boolean): void {
-		this.data[index].select = status;
-		this.licenseUpdate.emit(this.data[index]);
+	update(index: number): void {
+		this.data[index].select = !this.data[index].select;
+	}
+
+	send(): void {
+		this.licenseUpdate.emit(this.data);
 	}
 
 }

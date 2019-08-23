@@ -39,7 +39,7 @@ export class LicenseProvider implements HttpInterceptor {
 
 
 		function update() {
-			const license: ILicense = body;
+			const license: ILicense[] = body;
 			return ok(that.licenseService.update(license));
 		}
 

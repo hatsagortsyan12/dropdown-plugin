@@ -478,12 +478,8 @@ export class LicenseService {
 		return this.licenses;
 	}
 
-	update(updateLicense: ILicense): ILicense[] {
-		this.licenses.forEach(license => {
-			if (license.id === updateLicense.id) {
-				license = updateLicense;
-			}
-		});
+	update(updateLicenses: ILicense[]): ILicense[] {
+		this.licenses = updateLicenses;
 		localStorage.setItem('licenses', JSON.stringify(this.licenses));
 		return this.licenses;
 	}

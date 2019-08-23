@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
 			});
 	}
 
-	update(license: ILicense): void {
-		this.request.update(license)
+	update(licenses: ILicense[]): void {
+		this.request.update(licenses)
 			.subscribe(res => {
 				this.licenses = res;
 			});
