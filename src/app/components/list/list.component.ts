@@ -11,10 +11,12 @@ export class ListComponent implements OnInit {
 	constructor() { }
 
 	data: ILicense[];
+	sourceData: ILicense[];
+	term: String;
 
 	@Input('licenses')
 	set license(licenses: ILicense[]) {
-		this.data = licenses || [];
+		this.sourceData = this.data = licenses || [];
 	}
 
 	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
@@ -26,8 +28,18 @@ export class ListComponent implements OnInit {
 		this.data[index].select = !this.data[index].select;
 	}
 
-	send(): void {
+	save(): void {
 		this.licenseUpdate.emit(this.data);
+	}
+
+	search(): void {
+		if (this.term) {
+			this.data = this.data.filter(item => {
+				return item.title.toLowerCase().includes(this.term.toLowerCase());
+			});
+		} else {
+			this.data = [ ...this.sourceData ];
+		}
 	}
 
 }

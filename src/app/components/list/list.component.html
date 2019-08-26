@@ -8,6 +8,7 @@
 		</div>
 	</div>
 	<cdk-virtual-scroll-viewport class="dropdown-container" itemSize="5">
+		<input [(ngModel)]="term" (keyup)="search()" type="text" class="searchbox" placeholder="Search">
 		<ng-container *cdkVirtualFor="let item of data; let i = index;">
 			<div [ngClass]="{'selected': item.select}" class="select-row d-flex" (click)="update(i, true)">
 				<img src="{{item.image}}">
@@ -15,5 +16,5 @@
 			</div>
 		</ng-container>
 	</cdk-virtual-scroll-viewport>
-	<button (click)="send()">Save</button>
+	<button (click)="save()">Save</button>
 </div>

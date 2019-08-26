@@ -1,6 +1,10 @@
 .dropdown-container {
 	height: 300px;
 	overflow-y: scroll;
+
+	.searchbox {
+		width: 100%;
+	}
 }
 
 .select-row {
@@ -30,4 +34,6 @@
 
 .select-box {
 	margin-bottom: 25px;
+	height: 90px;
+	overflow-y: scroll;
 }
