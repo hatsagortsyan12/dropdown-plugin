@@ -11,12 +11,11 @@ export class ListComponent implements OnInit {
 	constructor() { }
 
 	data: ILicense[];
-	sourceData: ILicense[];
 	term: String;
 
 	@Input('licenses')
 	set license(licenses: ILicense[]) {
-		this.sourceData = this.data = licenses || [];
+		this.data = licenses || [];
 	}
 
 	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
@@ -34,11 +33,17 @@ export class ListComponent implements OnInit {
 
 	search(): void {
 		if (this.term) {
-			this.data = this.data.filter(item => {
-				return item.title.toLowerCase().includes(this.term.toLowerCase());
+			this.data.forEach(item => {
+				if (!item.title.toLowerCase().includes(this.term.toLowerCase())) {
+					item.show = false;
+				} else {
+					item.show = true;
+				}
 			});
 		} else {
-			this.data = [ ...this.sourceData ];
+			this.data.forEach(item => {
+				item.show = true;
+			});
 		}
 	}
 
