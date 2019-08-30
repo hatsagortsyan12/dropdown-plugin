@@ -12,13 +12,17 @@ export class ListComponent implements OnInit {
 
 	data: ILicense[];
 	term: String;
+	offset: number = 0;
+	limit: number = 10;
 
 	@Input('licenses')
 	set license(licenses: ILicense[]) {
 		this.data = licenses || [];
 	}
+	@Input() lazyLoad: boolean;
 
 	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
+	@Output() getLicenses: EventEmitter<number> = new EventEmitter<number>();
 
 	ngOnInit() {
 	}
@@ -44,6 +48,13 @@ export class ListComponent implements OnInit {
 			this.data.forEach(item => {
 				item.show = true;
 			});
+		}
+	}
+
+	public scrollHandler(event): void {
+		const calcs = (event.srcElement.offsetHeight + event.srcElement.scrollTop) >= event.srcElement.scrollHeight;
+		if (this.lazyLoad && calcs) {
+			this.getLicenses.emit(this.offset += this.limit);
 		}
 	}
 

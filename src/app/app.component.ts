@@ -9,7 +9,6 @@ import { DataService } from '@services/.';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	title = 'Dropdown';
 
 	licenses: ILicense[];
 
@@ -24,6 +23,13 @@ export class AppComponent implements OnInit {
 
 	update(licenses: ILicense[]): void {
 		this.request.update(licenses)
+			.subscribe(res => {
+				this.licenses = res;
+			});
+	}
+
+	getLicenses(offset: number): void {
+		this.request.get()
 			.subscribe(res => {
 				this.licenses = res;
 			});

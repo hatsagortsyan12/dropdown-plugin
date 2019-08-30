@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 offset-sm-4 block">
-				<app-list [licenses]="licenses" (licenseUpdate)="update($event)"></app-list>
+				<app-list [licenses]="licenses" (licenseUpdate)="update($event)" (getLicenses)="getLicenses($event)" [lazyLoad]=true></app-list>
 		</div>
 	</div>
 </div>

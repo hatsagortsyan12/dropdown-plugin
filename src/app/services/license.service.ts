@@ -128,13 +128,6 @@ export class LicenseService {
 			select: false
 		},
 		{
-			id: 23,
-			title: 'Miami Hurricanes',
-			image: 'https://dlpi0glski737.cloudfront.net/uploads/licenses/23/picture/42yypm.png',
-			show: true,
-			select: false
-		},
-		{
 			id: 24,
 			title: 'South Carolina Gamecocks',
 			image: 'https://dlpi0glski737.cloudfront.net/uploads/licenses/24/picture/k7mn3p.png',
