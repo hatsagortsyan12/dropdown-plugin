@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { ILicense } from '@interfaces/.';
+import { ILicense, ILicenseData } from '@interfaces/.';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
 	constructor(private http: HttpClient) { }
 
-	get() {
-		return this.http.get<ILicense[]>(`${environment.baseURL}/${environment.api.licenses}`);
+	get(term: string = '') {
+		return this.http.get<ILicenseData>(`${environment.baseURL}/${environment.api.licenses}`);
 	}
 
 	update(license: ILicense[]) {
-		return this.http.put<ILicense[]>(`${environment.baseURL}/${environment.api.licenses}`, license);
+		return this.http.put<ILicenseData>(`${environment.baseURL}/${environment.api.licenses}`, license);
 	}
+
 }

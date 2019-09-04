@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ILicense } from '@interfaces/.';
+import { ILicense, ILicenseData } from '@interfaces/.';
+import _ from 'lodash';
 
 @Injectable({
 	providedIn: 'root'
@@ -543,14 +544,17 @@ export class LicenseService {
 		}
 	}
 
-	get(): ILicense[] {
-		return this.licenses;
+	get(): ILicenseData {
+		return  { data: this.licenses, select: _.filter(this.licenses, { select: true })};
 	}
 
-	update(updateLicenses: ILicense[]): ILicense[] {
-		this.licenses = updateLicenses;
+	update(updateLicenses: ILicense[]): ILicenseData {
+		_.forEach(updateLicenses, updatedLicense => {
+			const licenseToUpdate = _.find(this.licenses, { id: updatedLicense.id });
+			licenseToUpdate.select = updatedLicense.id === licenseToUpdate.id ? updatedLicense.select : licenseToUpdate.select;
+		});
 		localStorage.setItem('licenses', JSON.stringify(this.licenses));
-		return this.licenses;
+		return this.get();
 	}
 
 }
