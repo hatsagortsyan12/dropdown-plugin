@@ -15,12 +15,12 @@ export class AppComponent implements OnInit {
 	constructor(private request: DataService) {	}
 
 	ngOnInit() {
-		this.request.get()
-			.subscribe(res => {
-				this.licenses = res;
-			});
+		// this.request.get()
+		// 	.subscribe(res => {
+		// 		this.licenses = res;
+		// 	});
 
-		// this.getLicenses({ limit: 10, offset: 0});
+		this.getLicenses({ limit: 10, offset: 0});
 	}
 
 	update(licenses: ILicense[]): void {
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 					, resData = res;
 
 				if (limit) {
-					resData.data = resData.data.slice(offset, offset + limit);
+					resData.data = resData.data.slice(offset, limit + offset);
 				}
 
 				this.licenses = resData;
@@ -46,15 +46,14 @@ export class AppComponent implements OnInit {
 	}
 
 	searchLicenses(term: string): void {
-		const searchData = [...this.licenses.data];
-		searchData.forEach(item => {
-			if (!item.title.toLowerCase().includes(term.toLowerCase())) {
-				item.show = false;
-			} else {
-				item.show = true;
-			}
+		this.request.get()
+			.subscribe(res => {
+				const searchData = [...res.data];
+				searchData.forEach(item => {
+					item.show = item.title.toLowerCase().includes(term.toLowerCase());
+			});
+			this.licenses.data = searchData;
+			this.licenses = { ...this.licenses };
 		});
-
-		this.licenses.data = searchData;
 	}
 }
