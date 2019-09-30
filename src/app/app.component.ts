@@ -15,12 +15,8 @@ export class AppComponent implements OnInit {
 	constructor(private request: DataService) {	}
 
 	ngOnInit() {
-		// this.request.get()
-		// 	.subscribe(res => {
-		// 		this.licenses = res;
-		// 	});
-
-		this.getLicenses({ limit: 10, offset: 0});
+		this.getLicenses({});
+		// this.getLicenses({ limit: 10, offset: 0});
 	}
 
 	update(licenses: ILicense[]): void {

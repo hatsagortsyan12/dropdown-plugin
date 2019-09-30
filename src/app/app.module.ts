@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { LicenseService } from '@services/.';
 import { LicenseProvider } from '@providers/.';
@@ -19,7 +18,6 @@ import { ListComponent } from '@components/.';
 	imports: [
 		BrowserModule,
 		FormsModule,
-		ScrollingModule,
 		HttpClientModule
 	],
 	providers: [

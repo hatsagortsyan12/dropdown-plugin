@@ -17,9 +17,20 @@ export class ListComponent implements OnInit {
 	offset: number = 0;
 
 	@Input() lazyLoad: boolean;
-	@Input() limit: number = 10;
+	@Input() limit: number = 20;
 	@Input('licenses')
 	set license(licenses: ILicenseData) {
+		this._init(licenses);
+	}
+
+	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
+	@Output() getLicenses: EventEmitter<object> = new EventEmitter<object>();
+	@Output() searchLicenses: EventEmitter<string> = new EventEmitter<string>();
+
+	ngOnInit() {
+	}
+
+	private _init(licenses: ILicenseData): void {
 		if (licenses) {
 			if (this.data.length) {
 				this.data.push(...licenses.data);
@@ -29,13 +40,6 @@ export class ListComponent implements OnInit {
 			}
 		}
 		this.select = licenses ? licenses.select : [];
-	}
-
-	@Output() licenseUpdate: EventEmitter<ILicense[]> = new EventEmitter<ILicense[]>();
-	@Output() getLicenses: EventEmitter<object> = new EventEmitter<object>();
-	@Output() searchLicenses: EventEmitter<string> = new EventEmitter<string>();
-
-	ngOnInit() {
 	}
 
 	public update(index: number): void {
@@ -52,7 +56,7 @@ export class ListComponent implements OnInit {
 				this.searchLicenses.emit(this.term);
 			} else {
 				this.data.forEach(item => {
-					item.show = !item.title.toLowerCase().includes(this.term.toLowerCase());
+					item.show = item.title.toLowerCase().includes(this.term.toLowerCase());
 				});
 			}
 		} else {

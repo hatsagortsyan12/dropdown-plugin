@@ -7,14 +7,14 @@
 			</div>
 		</div>
 	</div>
-	<cdk-virtual-scroll-viewport class="dropdown-container" itemSize="5" (scroll)="scrollHandler($event)">
+	<div class="dropdown-container" (scroll)="scrollHandler($event)">
 		<input [(ngModel)]="term" (keyup)="search()" type="text" class="searchbox" placeholder="Search">
-		<ng-container *cdkVirtualFor="let item of data; templateCacheSize: data.length; let i = index; trackBy: item?.id">
+		<div *ngFor="let item of data; let i = index; trackBy: item?.id">
 			<div *ngIf="item.show" [ngClass]="{'selected': item.select}" class="select-row d-flex" (click)="update(i, true)">
 				<img src="{{item.image}}">
 				<p>{{item.title}}</p>
 			</div>
-		</ng-container>
-	</cdk-virtual-scroll-viewport>
+		</div>
+	</div>
 	<button (click)="save()">Save</button>
 </div>
