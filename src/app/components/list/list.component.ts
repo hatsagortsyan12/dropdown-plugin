@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ILicense, ILicenseData } from '@interfaces/.';
-import { _ } from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-list',
@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
 	select: ILicense[];
 	term: string = '';
 	offset: number = 0;
+	selectToggle: boolean = true;
 
 	@Input() lazyLoad: boolean;
 	@Input() limit: number = 20;
@@ -71,6 +72,12 @@ export class ListComponent implements OnInit {
 		if (this.lazyLoad && calcs) {
 			this.getLicenses.emit({ limit: this.limit, offset: this.offset += this.limit });
 		}
+	}
+
+	public selectAll(): void {
+		this.selectToggle = !this.selectToggle;
+		this.select = this.data;
+		_.each(this.select, item => item.select = this.selectToggle);
 	}
 
 }

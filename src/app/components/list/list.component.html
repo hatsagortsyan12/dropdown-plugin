@@ -1,7 +1,7 @@
 <div>
 	<div class="select-box">
 		<div *ngFor="let item of select; let i = index; trackBy: item?.id">
-			<div class="select-row d-flex" (click)="update(i, false)">
+			<div class="select-row d-flex" (click)="update(i)">
 				<img src="{{item.image}}">
 				<p>{{item.title}}</p>
 			</div>
@@ -10,11 +10,12 @@
 	<div class="dropdown-container" (scroll)="scrollHandler($event)">
 		<input [(ngModel)]="term" (keyup)="search()" type="text" class="searchbox" placeholder="Search">
 		<div *ngFor="let item of data; let i = index; trackBy: item?.id">
-			<div *ngIf="item.show" [ngClass]="{'selected': item.select}" class="select-row d-flex" (click)="update(i, true)">
+			<div *ngIf="item.show" [ngClass]="{'selected': item.select}" class="select-row d-flex" (click)="update(i)">
 				<img src="{{item.image}}">
 				<p>{{item.title}}</p>
 			</div>
 		</div>
 	</div>
+	<button (click)="selectAll()">Select All</button>
 	<button (click)="save()">Save</button>
 </div>
